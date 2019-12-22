@@ -28,16 +28,18 @@ class Dataset(object):
         return int(label.strip()[-1])
 
     def get_pandas_df(self, filename):
-        '''
-        Load the data into Pandas.DataFrame object
-        This will be used to convert data to torchtext object
-        '''
-        with open(filename, 'r') as datafile:     
-            data = [line.strip().split(',', maxsplit=1) for line in datafile]
-            data_text = list(map(lambda x: x[1], data))
-            data_label = list(map(lambda x: self.parse_label(x[0]), data))
+        # '''
+        # Load the data into Pandas.DataFrame object
+        # This will be used to convert data to torchtext object
+        # '''
+        # with open(filename, 'r') as datafile:
+        #     data = [line.strip().split(',', maxsplit=1) for line in datafile]
+        #     data_text = list(map(lambda x: x[1], data))
+        #     data_label = list(map(lambda x: self.parse_label(x[0]), data))
+        #
+        # full_df = pd.DataFrame({"text":data_text, "label":data_label})
 
-        full_df = pd.DataFrame({"text":data_text, "label":data_label})
+        full_df = pd.read_csv(filename)
         return full_df
     
     def load_data(self, w2v_file, train_file, test_file, val_file=None):
@@ -57,7 +59,7 @@ class Dataset(object):
         tokenizer = lambda sent: [x.text for x in NLP.tokenizer(sent) if x.text != " "]
         
         # Creating Field for data
-        TEXT = data.Field(sequential=True, tokenize=tokenizer, lower=True, fix_length=self.config.max_sen_len)
+        TEXT = data.Field(sequential=True, tokenize=tokenizer, lower=True)
         LABEL = data.Field(sequential=False, use_vocab=False)
         datafields = [("text",TEXT),("label",LABEL)]
         
