@@ -6,7 +6,9 @@ from torchtext.vocab import Vectors
 import spacy
 import pandas as pd
 import numpy as np
+import tokenize_uk
 from sklearn.metrics import accuracy_score
+
 
 class Dataset(object):
     def __init__(self, config):
@@ -55,11 +57,9 @@ class Dataset(object):
             val_file (String): absolute path to validation file
         '''
 
-        NLP = spacy.load('en')
-        tokenizer = lambda sent: [x.text for x in NLP.tokenizer(sent) if x.text != " "]
-        
+
         # Creating Field for data
-        TEXT = data.Field(sequential=True, tokenize=tokenizer, lower=True)
+        TEXT = data.Field(sequential=True, tokenize=tokenize_uk.tokenize_words, lower=True)
         LABEL = data.Field(sequential=False, use_vocab=False)
         datafields = [("text",TEXT),("label",LABEL)]
         
