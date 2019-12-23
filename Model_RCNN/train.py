@@ -17,8 +17,8 @@ if __name__=='__main__':
     if len(sys.argv) > 3:
         test_file = sys.argv[2]
     
-    w2v_file = '../data/ubercorpus.cased.tokenized.glove.300d'
-    
+    w2v_file = '../data/ubercorpus.cased.tokenized.word2vec.300d'
+
     dataset = Dataset(config)
     dataset.load_data(w2v_file, train_file, test_file)
     
