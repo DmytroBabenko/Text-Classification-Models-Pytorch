@@ -79,8 +79,8 @@ class Dataset(object):
             val_data = data.Dataset(val_examples, datafields)
         else:
             train_data, val_data = train_data.split(split_ratio=0.8)
-        
-        TEXT.build_vocab(vectors=Vectors(w2v_file))
+        vectors = Vectors(w2v_file)
+        TEXT.build_vocab([vectors.itos], vectors=vectors)
         self.word_embeddings = TEXT.vocab.vectors
         self.vocab = TEXT.vocab
         
