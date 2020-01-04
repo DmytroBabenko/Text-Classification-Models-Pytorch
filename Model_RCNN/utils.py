@@ -42,6 +42,7 @@ class Dataset(object):
         # full_df = pd.DataFrame({"text":data_text, "label":data_label})
 
         full_df = pd.read_csv(filename)
+        full_df['label'] = full_df['label'].apply(lambda x: int(x[-1]))
         return full_df
     
     def load_data(self, w2v_file, train_file, test_file, val_file=None):
