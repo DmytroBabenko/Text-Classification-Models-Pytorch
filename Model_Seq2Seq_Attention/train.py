@@ -1,5 +1,5 @@
 # train.py
-
+from model import Seq2SeqAttention
 from utils import *
 from model import *
 from config import Config

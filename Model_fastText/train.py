@@ -1,5 +1,5 @@
 # train.py
-
+from model import fastText
 from utils import *
 from model import *
 from config import Config
